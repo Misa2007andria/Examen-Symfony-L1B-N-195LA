@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle habitude{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Ajouter une nouvelle habitude</h1>
+
+        {{ form_start(form) }}
+
+            {{ form_row(form.name) }}
+            {{ form_row(form.Frequence) }}
+            {{ form_row(form.singleDate) }}
+
+            <button class="btn btn-primary">Enregistrer</button>
+
+        {{ form_end(form) }}
+
+        <a href="{{ path('app_habit_index') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("input[name$='[singleDate]']", {
+            dateFormat: "Y-m-d",
+            allowInput: true,
+        });
+    </script>
+{% endblock %}

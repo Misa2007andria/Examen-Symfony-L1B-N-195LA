@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Habit index{% endblock %}
+
+{% block body %}
+    <h1>Habit index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Frequence</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for habit in habits %}
+            <tr>
+                <td>{{ habit.id }}</td>
+                <td>{{ habit.name }}</td>
+                <td>{{ habit.Frequence }}</td>
+                <td>{{ habit.Date ? habit.Date|json_encode : '' }}</td>
+                <td>
+                    <a href="{{ path('app_habit_show', {'id': habit.id}) }}">Show</a>
+                    <a href="{{ path('app_habit_edit', {'id': habit.id}) }}">Edit</a>
+                    <a href="{{ path('app_habit_progress', {'id': habit.id}) }}">Voir les progrès</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">No records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_habit_new') }}" class="btn btn-primary">Create new</a>
+{% endblock %}
